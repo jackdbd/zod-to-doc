@@ -3,11 +3,11 @@
  *
  * @packageDocumentation
  */
-import makeDebug from 'debug'
+import defDebug from 'debug'
 import { z } from 'zod'
 import { DEBUG_PREFIX } from './constants.js'
 
-const debug = makeDebug(`${DEBUG_PREFIX}:lib`)
+const debug = defDebug(`${DEBUG_PREFIX}:lib`)
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const defaultZodValue = (value: any) => {

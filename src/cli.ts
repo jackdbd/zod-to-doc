@@ -2,12 +2,12 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
-import makeDebug from 'debug'
+import defDebug from 'debug'
 import yargs from 'yargs/yargs'
 import { markdownTableFromZodSchema } from './lib.js'
 import { CLI_NAME, DEBUG_PREFIX } from './constants.js'
 
-const debug = makeDebug(`${DEBUG_PREFIX}:cli`)
+const debug = defDebug(`${DEBUG_PREFIX}:cli`)
 
 // https://github.com/thi-ng/umbrella/blob/develop/tools/src/readme.ts
 // https://github.com/thi-ng/umbrella/blob/develop/tools/bin/readme.mjs
@@ -70,8 +70,8 @@ if (!fs.existsSync(module_filepath)) {
   throw new Error(`Module containing Zod schemas not found: ${module_filepath}`)
 }
 
-const ts_module = await import(module_filepath)
-const schema = ts_module[argv.schema]
+const es_module = await import(module_filepath)
+const schema = es_module[argv.schema]
 debug(`import { ${argv.schema} } from '${module_filepath}'`)
 
 let title = ''
