@@ -1,6 +1,6 @@
 {
   "name": "@jackdbd/zod-to-doc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Inject your [Zod](https://github.com/colinhacks/zod) schemas into your docs.",
   "author": {
     "name": "Giacomo Debidda",

@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## [1.0.1](https://github.com/jackdbd/zod-to-doc/compare/v1.0.0...v1.0.1) (2024-02-02)
+
 ## 1.0.0 (2024-02-02)
 
 
