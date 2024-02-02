@@ -11,5 +11,4 @@
 |  [arrayFromZodSchema](./zod-to-doc.arrayfromzodschema.md) | Converts a Zod schema into an array of objects. |
 |  [defaultZodValue](./zod-to-doc.defaultzodvalue.md) |  |
 |  [markdownTableFromZodSchema](./zod-to-doc.markdowntablefromzodschema.md) | Creates a markdown table from a Zod schema. |
-|  [stringify](./zod-to-doc.stringify.md) |  |
 

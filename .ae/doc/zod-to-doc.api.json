@@ -239,7 +239,7 @@
         {
           "kind": "Variable",
           "canonicalReference": "@jackdbd/zod-to-doc!markdownTableFromZodSchema:var",
-          "docComment": "/**\n * Creates a markdown table from a Zod schema.\n *\n * @see\n *\n * [github.com - Retrieve default values from schema](https://github.com/colinhacks/zod/discussions/1953)\n *\n * @public @experimental\n */\n",
+          "docComment": "/**\n * Creates a markdown table from a Zod schema.\n *\n * @param schema - The Zod schema to convert.\n *\n * @see\n *\n * [Zod discussions #1953 - Retrieve default values from schema](https://github.com/colinhacks/zod/discussions/1953)\n *\n * @public @experimental\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
@@ -275,29 +275,6 @@
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 6
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@jackdbd/zod-to-doc!stringify:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "stringify: "
-            },
-            {
-              "kind": "Content",
-              "text": "(x: any) => any"
-            }
-          ],
-          "fileUrlPath": "src/lib.ts",
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "stringify",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
           }
         }
       ]

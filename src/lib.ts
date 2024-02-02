@@ -74,8 +74,12 @@ export const arrayFromZodSchema = <S extends z.AnyZodObject>(schema: S) => {
   return { value: arr }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable @typescript-eslint/no-explicit-any
+/**
+ * @internal
+ */
 export const stringify = (x: any) => {
+  // eslint-enable @typescript-eslint/no-explicit-any
   if (x === true || x === false || x === null || x === undefined) {
     return x
   }
@@ -90,7 +94,9 @@ export const stringify = (x: any) => {
 /**
  * Creates a markdown table from a Zod schema.
  *
- * @see [github.com - Retrieve default values from schema](https://github.com/colinhacks/zod/discussions/1953)
+ * @param schema - The Zod schema to convert.
+ *
+ * @see [Zod discussions #1953 - Retrieve default values from schema](https://github.com/colinhacks/zod/discussions/1953)
  *
  * @public
  * @experimental

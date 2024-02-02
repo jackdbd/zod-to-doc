@@ -33,9 +33,9 @@ export const markdownTableFromZodSchema: <S extends z.AnyZodObject>(schema: S) =
     error?: undefined;
 };
 
-// Warning: (ae-missing-release-tag) "stringify" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-internal-missing-underscore) The name "stringify" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @public (undocumented)
+// @internal (undocumented)
 export const stringify: (x: any) => any;
 
 // (No @packageDocumentation comment for this package)
