@@ -14,6 +14,7 @@
   },
   "keywords": [
     "docs",
+    "readme",
     "schemas",
     "zod"
   ],
@@ -68,7 +69,7 @@
     "format": "prettier --config ./config/prettier.cjs --write ./config/**/*.{cjs,json} ./src/**/*.ts ./test/**/*.mjs",
     "lint": "eslint --config ./config/eslint.cjs",
     "nuke": "npm run clean && rimraf node_modules 'package-lock.json'",
-    "release": "semantic-release --debug --dry-run --no-ci",
+    "release:dry": "semantic-release --debug --dry-run --no-ci",
     "size": "pkg-size ./dist --sort-by=brotli --ignore-files {*.d.ts,*.map}",
     "test": "node --test --experimental-test-coverage",
     "test:ci": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info",

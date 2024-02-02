@@ -22,7 +22,7 @@ jobs:
         # 2. Active LTS
         # 3. Current (i.e. the latest Node.js version available)
         # https://nodejs.org/en/about/previous-releases
-        node: [lts/Hydrogen, lts/Iron]
+        node: [lts/Iron]
         # node: [lts/Hydrogen, lts/Iron, current]
     steps:
       - name: 🛎️ Checkout repo
@@ -44,8 +44,19 @@ jobs:
         continue-on-error: true
         run: npm audit --audit-level moderate
 
-      - name: 📦 Build TypeScript files
+      - name: 🔨 Build TypeScript files
         run: npm run build:ts
+
+      - name: 📦 Size report
+        if: github.event_name == 'pull_request'
+        uses: pkg-size/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          build-command: npm run build:ts
+          display-size: uncompressed,gzip,brotli
+          hide-files: '{*.d.ts,*.map}'
+          unchanged-files: show
 
       - name: 🔍 Test
         run: npm run test:ci

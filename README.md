@@ -106,10 +106,11 @@ Output:
 
 <!-- Same example, but using [transclude](https://github.com/thi-ng/umbrella/tree/main/packages/transclude). -->
 
-| Key | Default | Description |
+<!-- | Key | Default | Description |
 |---|---|---|
 | `manufacturer` | `undefined` | Car tire manufacturer |
 | `pressure` | `30` | Car tire pressure in PSI |
+ -->
 
 ## Troubleshooting
 
