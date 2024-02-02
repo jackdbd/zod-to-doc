@@ -1,0 +1,14 @@
+# api-extractor files/dierectories that should not be tracked
+.ae/temp/
+.ae/tsdoc.metadata.json
+
+# dependencies
+node_modules/
+
+# test coverage
+coverage/*
+!coverage/README.md
+
+# Typescript compilation output files
+dist/
+tsconfig.tsbuildinfo

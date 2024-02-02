@@ -1,0 +1,12 @@
+{
+  "[javascript][json][typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "api-extractor.json": "jsonc",
+    "tsconfig.json": "jsonc"
+  },
+  "prettier.configPath": "config/prettier.cjs",
+  "prettier.requireConfig": true
+}

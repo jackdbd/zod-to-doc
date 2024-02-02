@@ -1,0 +1,108 @@
+{
+  "name": "@jackdbd/zod-to-doc",
+  "version": "0.1.0",
+  "description": "Inject your [Zod](https://github.com/colinhacks/zod) schemas into your docs.",
+  "author": {
+    "name": "Giacomo Debidda",
+    "email": "giacomo@giacomodebidda.com",
+    "url": "https://giacomodebidda.com/"
+  },
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "docs",
+    "schemas",
+    "zod"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jackdbd/zod-to-doc"
+  },
+  "homepage": "https://github.com/jackdbd/zod-to-doc/tree/main#readme",
+  "type": "module",
+  "bin": {
+    "ztd": "./dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/cli.js"
+    },
+    "./lib": {
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    ">=4.0": {
+      "*": [
+        "./dist/*.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
+  "scripts": {
+    "ae:local": "api-extractor run --config ./config/api-extractor.json --verbose --local",
+    "build": "run-s 'build:ts' 'docs' --print-label",
+    "build:ts": "tsc -p tsconfig.json",
+    "build:ts:watch": "tsc -p tsconfig.json --watch",
+    "clean": "rimraf dist/ tsconfig.tsbuildinfo",
+    "cli": "ztd --help",
+    "dev": "run-p 'build:ts:watch' 'test:watch'",
+    "example": "run-s 'example:car' 'example:car_tire'",
+    "example:car": "./dist/cli.js --module ./fixtures/schemas.mjs --schema car --placeholder car-table --title '#### Car table' --filepath tpl.readme.md",
+    "example:car_tire": "./dist/cli.js --module ./fixtures/schemas.mjs --schema car_tire --placeholder car-tire-table --title '#### Car tire table' --filepath tpl.readme.md",
+    "docs": "run-s 'docs:ae' 'docs:ad' 'docs:typedoc' 'docs:readme' --print-label",
+    "docs:ae": "api-extractor run --config ./config/api-extractor.json --verbose",
+    "docs:ad": "api-documenter markdown --input-folder .ae/doc --output-folder api-docs",
+    "docs:readme": "npm run example && tsm readme.ts",
+    "docs:typedoc": "typedoc src/lib.ts --excludeInternal --excludePrivate --out docs --plugin typedoc-plugin-zod --theme default",
+    "format": "prettier --config ./config/prettier.cjs --write ./config/**/*.{cjs,json} ./src/**/*.ts ./test/**/*.mjs",
+    "lint": "eslint --config ./config/eslint.cjs",
+    "nuke": "npm run clean && rimraf node_modules 'package-lock.json'",
+    "release": "semantic-release --debug --dry-run --no-ci",
+    "size": "pkg-size ./dist --sort-by=brotli --ignore-files {*.d.ts,*.map}",
+    "test": "node --test --experimental-test-coverage",
+    "test:ci": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info",
+    "test:watch": "node --test --watch"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "@microsoft/api-documenter": "^7.23.20",
+    "@microsoft/api-extractor": "^7.39.4",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@thi.ng/transclude": "^0.1.63",
+    "@types/debug": "^4.1.12",
+    "@types/yargs": "^17.0.32",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "debug": "^4.3.4",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "npm-check-updates": "^16.14.14",
+    "npm-run-all": "^4.1.5",
+    "pkg-size": "^2.4.0",
+    "prettier": "^3.2.4",
+    "rimraf": "^5.0.5",
+    "semantic-release": "^23.0.0",
+    "tsm": "^2.3.0",
+    "typedoc": "^0.25.7",
+    "typedoc-plugin-zod": "^1.1.2",
+    "typescript": "^5.3.3",
+    "yargs": "^17.7.2",
+    "zocker": "^1.4.1"
+  }
+}
