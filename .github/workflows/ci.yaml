@@ -13,8 +13,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ubuntu-latest]
-        # os: [ubuntu-latest, macos-latest]
         # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
         os: [ubuntu-latest, macos-latest, windows-latest]
         # Test all packages with:
@@ -58,8 +56,17 @@ jobs:
           hide-files: '{*.d.ts,*.map}'
           unchanged-files: show
 
-      - name: 🔍 Test
+      - name: 🔍 Test on Linux
+        if: runner.os == 'Linux'
         run: npm run test:ci
+      
+      - name: 🔍 Test on macOS
+        if: runner.os == 'macOS'
+        run: npm run test
+      
+      - name: 🔍 Test on Windows
+        if: runner.os == 'Windows'
+        run: npm run test
 
       - name: ⬆️ Upload test coverage to Codecov
         if: runner.os == 'Linux'
