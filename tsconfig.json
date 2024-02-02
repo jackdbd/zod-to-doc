@@ -1,62 +1,31 @@
 {
     "compilerOptions": {
-      // https://www.typescriptlang.org/tsconfig#baseUrl
       "baseUrl": ".",
-
-      // This tsconfig is for a library, so it's a good idea to generate .d.ts files.
-      // https://www.typescriptlang.org/tsconfig#declaration
       "declaration": true,
-  
-      // Source maps for .d.ts files are awesome because they allow a "Go to
-      // Definition" to go the original .ts file, not the .d.ts (which is much
-      // less useful).
-      // https://www.typescriptlang.org/tsconfig#declarationMap
-      "declarationMap": true,
-  
+      "declarationMap": true,  
       // All new TypeScript projects should use "esModuleInterop": true.
       // https://esbuild.github.io/content-types/#es-module-interop
       // https://www.typescriptlang.org/tsconfig#esModuleInterop
-      "esModuleInterop": true,
-  
-      // https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames
+      "esModuleInterop": true,      
       "forceConsistentCasingInFileNames": true,
-  
       // Setting "importHelpers" to true would mean that a consumer of a library
       // would need to declare tslib as a dependency. Don't do it!
       // https://www.typescriptlang.org/tsconfig#importHelpers
-      "importHelpers": false,
-  
-      // This is not important for this project, but it speeds up compilation
-      // times, so I want to remember it for larger projects.
-      // https://www.typescriptlang.org/tsconfig#incremental
-      "incremental": true,
-  
-      // This project uses esbuild to bundle its applications. esbuild compiles
-      // the files independently, so we must set "isolatedModules": true.
-      // https://esbuild.github.io/content-types/#isolated-modules
-      // https://www.typescriptlang.org/tsconfig#isolatedModules
-      "isolatedModules": true,
-  
+      "importHelpers": false,  
       // https://www.typescriptlang.org/tsconfig#lib
       // Check Node.js support here:
       // https://node.green/
-      "lib": ["ESNext"],
-  
+      "lib": ["ESNext"],  
       // https://www.typescriptlang.org/tsconfig#module
-      "module": "NodeNext",
-  
+      "module": "NodeNext",  
       // https://www.typescriptlang.org/docs/handbook/module-resolution.html
-      "moduleResolution": "NodeNext",
-  
+      "moduleResolution": "NodeNext",  
       // https://www.typescriptlang.org/tsconfig#noImplicitAny
-      "noImplicitAny": true,
-  
+      "noImplicitAny": true,  
       // https://www.typescriptlang.org/tsconfig#noUnusedLocals
-      "noUnusedLocals": true,
-  
+      "noUnusedLocals": true,  
       // https://www.typescriptlang.org/tsconfig#noUnusedParameters
-      "noUnusedParameters": true,
-  
+      "noUnusedParameters": true,  
       "outDir": "./dist",
       // As far as I understand, preserveConstEnums has no effect for non-const
       // enums and should not affect the bundle size, but it must be set to true
@@ -64,38 +33,27 @@
       // https://stackoverflow.com/questions/28818849/how-do-the-different-enum-variants-work-in-typescript
       // https://www.typescriptlang.org/tsconfig#preserveConstEnums
       // https://ncjamieson.com/dont-export-const-enums/
-      "preserveConstEnums": true,
-      
-      // https://www.typescriptlang.org/tsconfig#removeComments
+      "preserveConstEnums": true,      
       "removeComments": false,
-
-      "rootDir": "./src",
-  
-      // it would be safer to set skipLibCheck to false, but it's kind of slow.
+      "rootDir": "./src",  
+      // It would be safer to set skipLibCheck to false, but it's kind of slow.
       // Maybe enable it from time to time to type check dependencies.
       // https://www.typescriptlang.org/tsconfig#skipLibCheck
-      "skipLibCheck": true,
-  
-      // In most cases I want to generate source maps.
+      "skipLibCheck": false,  
+      // In most cases we want to generate source maps.
       // https://m.signalvnoise.com/paying-tribute-to-the-web-with-view-source/
-      "sourceMap": true,
-  
+      "sourceMap": true,  
       // strict mode sets many strict compiler options to true in one go.
       // https://www.typescriptlang.org/tsconfig#strict
-      "strict": true,
-  
+      "strict": true,  
       // https://www.typescriptlang.org/tsconfig#strictNullChecks
-      "strictNullChecks": true,
-  
+      "strictNullChecks": true,  
       // https://www.typescriptlang.org/tsconfig#target
       // https://node.green/
-         "target": "ES2020",
-  
+      "target": "ES2020",
       // https://www.typescriptlang.org/tsconfig#typeRoots
       "typeRoots": ["./node_modules/@types", "./custom-types"]
-    },
-  
-    "exclude": [      "./node_modules",    ],
-
+    },  
+    "exclude": ["./node_modules"],
     "include": ["./src/**/*.ts"]
   }
