@@ -12,7 +12,7 @@
 
 ## Examples
 
-Here are some tables generated using a couple of Zod schemas exported by [fixtures/schemas.mjs](./fixtures/schemas.mjs).
+Here are some tables generated using a couple of Zod schemas exported by [fixtures/schemas.mjs](https://github.com/jackdbd/zod-to-doc/blob/main/fixtures/schemas.mjs).
 
 ### Usage as a CLI
 
@@ -44,11 +44,11 @@ You get this output:
 
 ### Usage as a library
 
-Zod to Doc can also be used as a library. For example, the [readme.ts](./readme.ts) file in this repository uses `markdownTableFromZodSchema` to replace a mustache-style placeholder with this markdown table:
+Zod to Doc can also be used as a library. For example, the [readme.ts](https://github.com/jackdbd/zod-to-doc/blob/main/readme.ts) file in this repository uses `markdownTableFromZodSchema` to replace a mustache-style placeholder with this markdown table:
 
 #### Car tire table
 
-{{table.car_tire}}
+{{table.tire}}
 
 <!-- include troubleshooting.md -->
 

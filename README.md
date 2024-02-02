@@ -1,6 +1,6 @@
 # Zod to Doc
 
-[![npm version](https://badge.fury.io/js/@jackdbd%2Fzod-to-doc.svg)](https://www.npmjs.com/package/@jackdbd/zod-to-doc)
+[![npm version](https://badge.fury.io/js/@jackdbd%2Fzod-to-doc.svg)](https://badge.fury.io/js/@jackdbd%2Fzod-to-doc)
 [![install size](https://packagephobia.com/badge?p=@jackdbd/zod-to-doc)](https://packagephobia.com/result?p=@jackdbd/zod-to-doc)
 [![CodeCov badge](https://codecov.io/gh/jackdbd/zod-to-doc/graph/badge.svg?token=9jddzo5Dt3)](https://codecov.io/gh/jackdbd/zod-to-doc)
 [![CI](https://github.com/jackdbd/zod-to-doc/actions/workflows/ci.yaml/badge.svg)](https://github.com/jackdbd/zod-to-doc/actions/workflows/ci.yaml)
@@ -39,7 +39,7 @@ npm install --save-dev @jackdbd/zod-to-doc
 
 ## Examples
 
-Here are some tables generated using a couple of Zod schemas exported by [fixtures/schemas.mjs](./fixtures/schemas.mjs).
+Here are some tables generated using a couple of Zod schemas exported by [fixtures/schemas.mjs](https://github.com/jackdbd/zod-to-doc/blob/main/fixtures/schemas.mjs).
 
 ### Usage as a CLI
 
@@ -71,16 +71,14 @@ You get this output:
 
 ### Usage as a library
 
-Zod to Doc can also be used as a library. For example, the [readme.ts](./readme.ts) file in this repository uses `markdownTableFromZodSchema` to replace a mustache-style placeholder with this markdown table:
+Zod to Doc can also be used as a library. For example, the [readme.ts](https://github.com/jackdbd/zod-to-doc/blob/main/readme.ts) file in this repository uses `markdownTableFromZodSchema` to replace a mustache-style placeholder with this markdown table:
 
 #### Car tire table
 
 | Key | Default | Description |
 |---|---|---|
-| `manufacturer` | `undefined` | Car manufacturer |
-| `model` | `undefined` | Car model |
-| `tires` | `undefined` | Array of 4 elements |
-| `year` | `undefined` | Year in which the car was manufactured |
+| `manufacturer` | `undefined` | Car tire manufacturer |
+| `pressure` | `30` | Car tire pressure in PSI |
 
 ## Troubleshooting
 
@@ -102,4 +100,4 @@ export DEBUG=ztd:*
 
 ## License
 
-[MIT License](https://spdx.org/licenses/MIT.html)
+&copy; 2024 [Giacomo Debidda](https://www.giacomodebidda.com/) // [MIT License](https://spdx.org/licenses/MIT.html)

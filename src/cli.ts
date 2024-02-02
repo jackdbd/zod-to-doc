@@ -9,14 +9,6 @@ import { CLI_NAME, DEBUG_PREFIX } from './constants.js'
 
 const debug = defDebug(`${DEBUG_PREFIX}:cli`)
 
-// https://github.com/thi-ng/umbrella/blob/develop/tools/src/readme.ts
-// https://github.com/thi-ng/umbrella/blob/develop/tools/bin/readme.mjs
-// https://github.com/thi-ng/umbrella/blob/develop/tools/src/readme-examples.ts
-// https://github.com/thi-ng/umbrella/tree/develop/tools/src
-// https://github.com/thlorenz/doctoc/blob/95715a3a56fe08fb3d74e53f64b54b25756b31fa/lib/transform.js#L167C19-L167C69
-
-// https://github.com/colinhacks/zod/discussions/1953
-
 const argv = await yargs(process.argv.slice(2))
   .usage(
     './$0 - Generated a markdown table from a Zod schema and write it to a file'
@@ -24,7 +16,7 @@ const argv = await yargs(process.argv.slice(2))
   .option('module', {
     alias: 'm',
     demandOption: true,
-    describe: 'relative path to a ESM/TS module that exports a Zod schema',
+    describe: 'relative path to a ES module that exports a Zod schema',
     type: 'string'
   })
   .option('schema', {
@@ -58,12 +50,13 @@ const argv = await yargs(process.argv.slice(2))
       'If true, print the generated markdown to stdout instead of writing it to the specified file'
   })
   .example(
-    '$0 --module src/schemas/foo.ts --schema bar',
-    `use the 'bar' zod schema from the 'foo.ts' module to generate a markdown table and update the README.md file`
+    '$0 --module lib/schemas/foo.js --schema bar',
+    `use the 'bar' zod schema from the 'foo.js' ES module to generate a markdown table and update the README.md file`
   )
   .help('help')
   .wrap(80)
-  .epilogue('For more information, see http://example.com').argv
+  .epilogue('For more information, see https://github.com/jackdbd/zod-to-doc')
+  .argv
 
 const module_filepath = path.join(process.env.PWD!, argv.module)
 if (!fs.existsSync(module_filepath)) {
@@ -74,19 +67,11 @@ const es_module = await import(module_filepath)
 const schema = es_module[argv.schema]
 debug(`import { ${argv.schema} } from '${module_filepath}'`)
 
-let title = ''
-if (argv.title) {
-  title = argv.title
-} else {
-  title = schema.description
-    ? `**Table for ${schema.description}**`
-    : `**Table from Zod schema**`
-}
-
 const { error, value: table } = markdownTableFromZodSchema(schema)
 if (error) {
-  console.error(`Could not generate table from Zod schema: ${error.message}`)
+  const message = `Could not generate table from Zod schema: ${error.message}`
   console.error(error)
+  throw new Error(message)
 }
 debug(`table generated from Zod schema`)
 debug(table)
@@ -117,22 +102,17 @@ if (i_begin === -1) {
 const before = str.substring(0, i_begin).trimEnd()
 const after = str.substring(i_end).trimStart()
 
-const splits = [
-  before,
-  '\n\n',
-  placeholder_begin,
-  '\n',
-  tip,
-  '\n\n',
-  title,
-  '\n\n',
-  table,
-  '\n',
-  placeholder_end,
-  '\n\n',
-  after
-]
-
+const splits = [before, '\n\n', placeholder_begin, '\n', tip]
+if (argv.title) {
+  splits.push('\n\n')
+  splits.push(argv.title)
+}
+splits.push('\n\n')
+splits.push(table)
+splits.push('\n')
+splits.push(placeholder_end)
+splits.push('\n\n')
+splits.push(after)
 const md = splits.join('')
 
 if (argv['dry-run']) {

@@ -45,8 +45,12 @@ const zodToTable = (schema: z.AnyZodObject) => {
   }
 }
 
-const main = async () => {
-  const pkg_root = '.'
+interface Config {
+  pkg_root: string
+  project_started_in_year: number
+}
+
+const main = async ({ pkg_root, project_started_in_year }: Config) => {
   const outdoc = 'README.md'
   const pkg = JSON.parse(readFileSync(join(pkg_root, 'package.json'), 'utf-8'))
 
@@ -55,18 +59,27 @@ const main = async () => {
   const [npm_scope, unscoped_pkg_name] = pkg_name.split('/')
   const github_username = npm_scope.replace('@', '')
 
+  const now = new Date()
+  const year = now.getFullYear()
+
   const transcluded = transcludeFile(join(pkg_root, 'tpl.readme.md'), {
     pre: [preincludeFile],
     post: [toc(), compactEmptyLines],
     user: author,
     templates: {
       badges: () => {
+        // https://shields.io/badges/npm-downloads
+        // https://shields.io/badges/npm-downloads-by-package-author
+
+        // https://badge.fury.io/js/@jackdbd%2Feleventy-plugin-text-to-speech.svg
+
         const npm_package = link(
           image(
             `https://badge.fury.io/js/${npm_scope}%2F${unscoped_pkg_name}.svg`,
             'npm version'
           ),
-          `https://www.npmjs.com/package/${npm_scope}/${unscoped_pkg_name}`
+          `https://badge.fury.io/js/${npm_scope}%2F${unscoped_pkg_name}`
+          // `https://www.npmjs.com/package/${npm_scope}/${unscoped_pkg_name}`
         )
 
         const install_size = link(
@@ -171,16 +184,22 @@ const main = async () => {
       },
 
       'pkg.license': ({ user }) => {
-        // © 2022 - 2024 Karsten Schmidt
         // https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
-        const lines = [`## License`, '\n\n', licenseLink(pkg.license)]
-        //   lines.push(`\n\n`)
-        //   lines.push(`[${user.name}](${user.url})`)
+        const copyright =
+          year > project_started_in_year
+            ? `&copy; ${project_started_in_year} - ${year}`
+            : `&copy; ${year}`
+
+        const lines = [
+          `## License`,
+          '\n\n',
+          `${copyright} ${link(user.name, 'https://www.giacomodebidda.com/')} // ${licenseLink(pkg.license)}`
+        ]
         return lines.join('')
       },
 
       'table.car': zodToTable(car),
-      'table.car_tire': zodToTable(car_tire)
+      'table.tire': zodToTable(car_tire)
     }
   })
 
@@ -191,4 +210,7 @@ const main = async () => {
   debug(`${outdoc} updated`)
 }
 
-await main()
+await main({
+  pkg_root: '',
+  project_started_in_year: 2024
+})
