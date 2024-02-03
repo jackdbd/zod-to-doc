@@ -51,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          build-command: npm run build:ts
+          build-command: false # because we have just built (otherwise: npm run build:ts)
           display-size: uncompressed,gzip,brotli
           hide-files: '{*.d.ts,*.map}'
           unchanged-files: show

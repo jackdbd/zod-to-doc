@@ -148,7 +148,11 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
           ([name, version]) =>
             `| ${link(name, `https://www.npmjs.com/package/${name}`)} | \`${version}\` |`
         )
-        const table = [`| Package | Version |`, '|---|---|', rows].join('\n')
+        const table = [
+          `| Package | Version |`,
+          '|---|---|',
+          rows.join('\n')
+        ].join('\n')
 
         return [`## Dependencies`, '\n\n', table].join('')
       },
