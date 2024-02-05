@@ -46,11 +46,16 @@ const zodToTable = (schema: z.AnyZodObject) => {
 }
 
 interface Config {
+  current_year: number
   pkg_root: string
   project_started_in_year: number
 }
 
-const main = async ({ pkg_root, project_started_in_year }: Config) => {
+const main = async ({
+  current_year,
+  pkg_root,
+  project_started_in_year
+}: Config) => {
   const outdoc = 'README.md'
   const pkg = JSON.parse(readFileSync(join(pkg_root, 'package.json'), 'utf-8'))
 
@@ -58,9 +63,6 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
   const pkg_name = pkg.name as string
   const [npm_scope, unscoped_pkg_name] = pkg_name.split('/')
   const github_username = npm_scope.replace('@', '')
-
-  const now = new Date()
-  const year = now.getFullYear()
 
   const transcluded = transcludeFile(join(pkg_root, 'tpl.readme.md'), {
     pre: [preincludeFile],
@@ -76,7 +78,7 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
         const npm_package = link(
           image(
             `https://badge.fury.io/js/${npm_scope}%2F${unscoped_pkg_name}.svg`,
-            'npm version'
+            'npm package badge'
           ),
           `https://badge.fury.io/js/${npm_scope}%2F${unscoped_pkg_name}`
           // `https://www.npmjs.com/package/${npm_scope}/${unscoped_pkg_name}`
@@ -88,6 +90,14 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
             'install size'
           ),
           `https://packagephobia.com/result?p=${npm_scope}/${unscoped_pkg_name}`
+        )
+
+        const codefactor = link(
+          image(
+            `https://www.codefactor.io/repository/github/${github_username}/${unscoped_pkg_name}/badge`,
+            'CodeFactor badge'
+          ),
+          `https://www.codefactor.io/repository/github/${github_username}/${unscoped_pkg_name}`
         )
 
         const socket = link(
@@ -104,14 +114,6 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
             'CI'
           ),
           `https://github.com/${github_username}/${unscoped_pkg_name}/actions/workflows/ci.yaml`
-        )
-
-        const release_workflow = link(
-          image(
-            `https://github.com/${github_username}/${unscoped_pkg_name}/actions/workflows/release-to-npmjs.yaml/badge.svg`,
-            'Release to npmjs.com'
-          ),
-          `https://github.com/${github_username}/${unscoped_pkg_name}/actions/workflows/release-to-npmjs.yaml`
         )
 
         const codecov = link(
@@ -133,9 +135,9 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
         return [
           npm_package,
           install_size,
-          codecov,
           ci_workflow,
-          release_workflow,
+          codecov,
+          codefactor,
           socket,
           conventional_commits
         ].join('\n')
@@ -188,11 +190,10 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
       },
 
       'pkg.license': ({ user }) => {
-        // https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
         const copyright =
-          year > project_started_in_year
-            ? `&copy; ${project_started_in_year} - ${year}`
-            : `&copy; ${year}`
+          current_year > project_started_in_year
+            ? `&copy; ${project_started_in_year} - ${current_year}`
+            : `&copy; ${current_year}`
 
         const lines = [
           `## License`,
@@ -203,7 +204,24 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
       },
 
       'table.car': zodToTable(car),
-      'table.tire': zodToTable(car_tire)
+      'table.tire': zodToTable(car_tire),
+
+      troubleshooting: () => {
+        const lines = [
+          `## Troubleshooting`,
+          '\n',
+          `This project uses the [debug](https://github.com/debug-js/debug) library for logging.`,
+          `You can control what's logged using the \`DEBUG\` environment variable.`,
+          '\n',
+          `For example, if you set your environment variables in a \`.envrc\` file, you can do:`,
+          '\n',
+          `\`\`\`sh`,
+          `# print all logging statements`,
+          `export DEBUG=${DEBUG_PREFIX}:*`,
+          `\`\`\``
+        ]
+        return lines.join('\n')
+      }
     }
   })
 
@@ -215,6 +233,7 @@ const main = async ({ pkg_root, project_started_in_year }: Config) => {
 }
 
 await main({
+  current_year: new Date().getFullYear(),
   pkg_root: '',
   project_started_in_year: 2024
 })

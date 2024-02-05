@@ -8,13 +8,23 @@ on:
       - main
 
 jobs:
-  audit-build-test:
-    name: Audit, build, test package on ${{ matrix.os }}, Node ${{ matrix.node }}
+  audit-build-test-release:
+    name: Audit, build, test, release on ${{ matrix.os }}, Node ${{ matrix.node }}
+
+    # The minimum set of permissions required by semantic-release/github for
+    # the GITHUB_TOKEN and this job is explained here:
+    # https://github.com/semantic-release/github#configuration
+    # https://github.com/semantic-release/semantic-release/issues/2481#issuecomment-1409780688
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
         # Test all packages with:
         # 1. Maintenance LTS
         # 2. Active LTS
@@ -45,37 +55,93 @@ jobs:
       - name: 🔨 Build TypeScript files
         run: npm run build:ts
 
+      - name: 🔍 Test
+        run: npm run test
+
+      - name: 🔍 Test CI
+        continue-on-error: true
+        # From time to time the Node.js test runner fails when generating a coverage report. No idea why.
+        run: npm run test:ci
+      
+      - name: ⬆️ Upload test coverage to Codecov
+        if: runner.os == 'Linux'
+        # https://github.com/marketplace/actions/codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          fail_ci_if_error: false
+          files: ./coverage/lcov.info
+          verbose: true
+
       - name: 📦 Size report
-        if: github.event_name == 'pull_request'
+        if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest' }}
         uses: pkg-size/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           build-command: false # because we have just built (otherwise: npm run build:ts)
           display-size: uncompressed,gzip,brotli
-          hide-files: '{*.d.ts,*.map}'
+          # ignore all docs, TS type definitions and JS/TS source maps
+          hide-files: '{api-docs/**,docs/**,*.d.ts,*.map}'
           unchanged-files: show
-
-      - name: 🔍 Test on Linux
-        if: runner.os == 'Linux'
-        run: npm run test:ci
       
-      - name: 🔍 Test on macOS
-        if: runner.os == 'macOS'
-        run: npm run test
-      
-      - name: 🔍 Test on Windows
-        if: runner.os == 'Windows'
-        run: npm run test
-
-      - name: ⬆️ Upload test coverage to Codecov
-        if: runner.os == 'Linux'
-        # if: matrix.os == 'ubuntu-latest'
-        # https://github.com/marketplace/actions/codecov
-        uses: codecov/codecov-action@v4
+      - name: 🚀 Release to npmjs
+        if: ${{ matrix.os == 'ubuntu-latest' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/canary') }}
         env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          # This github token must allow to push to this GitHub repository.
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_NPM_TOKEN }}
+        run: npx semantic-release --ci
+
+  macos-build-test:
+    name: Build & test on ${{ matrix.os }}, Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [macos-latest]
+        node: [ lts/Iron]
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v4
+      
+      - name: ⚙️ Set up Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
         with:
-          fail_ci_if_error: true
-          files: ./coverage/lcov.info
-          verbose: true
+          node-version: ${{ matrix.node }}
+      
+      - name: ⬇️ Install dependencies
+        run: npm ci
+      
+      - name: 📦 Build npm package
+        run: npm run build:ts
+      
+      - name: 🔍 Test
+        run: npm run test
+
+  windows-build-test:
+    name: Build & test on ${{ matrix.os }}, Node ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [windows-latest]
+        node: [ lts/Iron]
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v4
+      
+      - name: ⚙️ Set up Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      
+      - name: ⬇️ Install dependencies
+        run: npm ci
+      
+      - name: 📦 Build npm package
+        run: npm run build:ts
+      
+      - name: 🔍 Test
+        run: npm run test

@@ -1,10 +1,10 @@
 # Zod to Doc
 
-[![npm version](https://badge.fury.io/js/@jackdbd%2Fzod-to-doc.svg)](https://badge.fury.io/js/@jackdbd%2Fzod-to-doc)
+[![npm package badge](https://badge.fury.io/js/@jackdbd%2Fzod-to-doc.svg)](https://badge.fury.io/js/@jackdbd%2Fzod-to-doc)
 [![install size](https://packagephobia.com/badge?p=@jackdbd/zod-to-doc)](https://packagephobia.com/result?p=@jackdbd/zod-to-doc)
-[![CodeCov badge](https://codecov.io/gh/jackdbd/zod-to-doc/graph/badge.svg?token=9jddzo5Dt3)](https://codecov.io/gh/jackdbd/zod-to-doc)
 [![CI](https://github.com/jackdbd/zod-to-doc/actions/workflows/ci.yaml/badge.svg)](https://github.com/jackdbd/zod-to-doc/actions/workflows/ci.yaml)
-[![Release to npmjs.com](https://github.com/jackdbd/zod-to-doc/actions/workflows/release-to-npmjs.yaml/badge.svg)](https://github.com/jackdbd/zod-to-doc/actions/workflows/release-to-npmjs.yaml)
+[![CodeCov badge](https://codecov.io/gh/jackdbd/zod-to-doc/graph/badge.svg?token=9jddzo5Dt3)](https://codecov.io/gh/jackdbd/zod-to-doc)
+[![CodeFactor badge](https://www.codefactor.io/repository/github/jackdbd/zod-to-doc/badge)](https://www.codefactor.io/repository/github/jackdbd/zod-to-doc)
 [![Socket Badge](https://socket.dev/api/badge/npm/package/@jackdbd/zod-to-doc)](https://socket.dev/npm/package/@jackdbd/zod-to-doc)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
