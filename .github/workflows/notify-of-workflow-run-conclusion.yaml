@@ -2,7 +2,8 @@ name: 'Notify of workflow run conclusion'
 
 on:
   workflow_run:
-    workflows: ['CI', 'Release to npmjs.com']
+    workflows:
+      - 'CI'
     types: [completed]
 
 jobs:
