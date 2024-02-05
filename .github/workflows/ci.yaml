@@ -55,18 +55,6 @@ jobs:
       - name: 🔨 Build TypeScript files
         run: npm run build:ts
 
-      - name: 📦 Size report
-        if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest' }}
-        uses: pkg-size/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          build-command: false # because we have just built (otherwise: npm run build:ts)
-          display-size: uncompressed,gzip,brotli
-          # ignore all docs, TS type definitions and JS/TS source maps
-          hide-files: '{api-docs/**,docs/**,*.d.ts,*.map}'
-          unchanged-files: show
-
       - name: 🔍 Test
         run: npm run test
 
@@ -85,6 +73,18 @@ jobs:
           fail_ci_if_error: false
           files: ./coverage/lcov.info
           verbose: true
+
+      - name: 📦 Size report
+        if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest' }}
+        uses: pkg-size/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          build-command: false # because we have just built (otherwise: npm run build:ts)
+          display-size: uncompressed,gzip,brotli
+          # ignore all docs, TS type definitions and JS/TS source maps
+          hide-files: '{api-docs/**,docs/**,*.d.ts,*.map}'
+          unchanged-files: show
       
       - name: 🚀 Release to npmjs
         if: ${{ matrix.os == 'ubuntu-latest' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/canary') }}
