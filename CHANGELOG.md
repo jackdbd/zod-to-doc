@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.0.5](https://github.com/jackdbd/zod-to-doc/compare/v1.0.4...v1.0.5) (2024-02-06)
+
+
+### Bug Fixes
+
+* add yargs as a dependency ([b1ea82c](https://github.com/jackdbd/zod-to-doc/commit/b1ea82c1d2dae30be2f9944f3fc3a7956fda3b8f))
+
 ## [1.0.4](https://github.com/jackdbd/zod-to-doc/compare/v1.0.3...v1.0.4) (2024-02-06)
 
 
