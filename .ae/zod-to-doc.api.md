@@ -36,7 +36,7 @@ export const markdownTableFromZodSchema: <S extends z.AnyZodObject>(schema: S) =
 // Warning: (ae-internal-missing-underscore) The name "stringify" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export const stringify: (x: any) => any;
+export const stringify: (x: any) => string;
 
 // (No @packageDocumentation comment for this package)
 

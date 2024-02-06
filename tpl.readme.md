@@ -6,6 +6,10 @@
 
 <!-- toc -->
 
+## About
+
+I was looking for a way to keep my documentation updated with my Zod schemas. To my surprise, I couldn't find any tool that would output a string representation of a Zod schema. So I decided to write my own. You can use this tool either as a library or as a CLI.
+
 {{pkg.installation}}
 
 {{pkg.docs}}
@@ -49,6 +53,10 @@ Zod to Doc can also be used as a library. For example, the [readme.ts](https://g
 #### Car tire table
 
 {{table.tire}}
+
+#### Dealership
+
+{{table.dealership}}
 
 <!-- include troubleshooting.md -->
 

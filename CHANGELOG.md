@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## [1.0.4-canary.2](https://github.com/jackdbd/zod-to-doc/compare/v1.0.4-canary.1...v1.0.4-canary.2) (2024-02-06)
+
+
+### Bug Fixes
+
+* modify package entry points ([09c700a](https://github.com/jackdbd/zod-to-doc/commit/09c700abc9991d6fe28040f4c18d3004d63f168d))
+
+## [1.0.4-canary.1](https://github.com/jackdbd/zod-to-doc/compare/v1.0.3...v1.0.4-canary.1) (2024-02-06)
+
+
+### Bug Fixes
+
+* modify package entry points ([6aad7d1](https://github.com/jackdbd/zod-to-doc/commit/6aad7d13e8ee7459ee8b3285a7414e0ebbe12622))
+
 ## [1.0.3](https://github.com/jackdbd/zod-to-doc/compare/v1.0.2...v1.0.3) (2024-02-02)
 
 

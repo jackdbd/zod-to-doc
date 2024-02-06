@@ -34,6 +34,21 @@ export const arrayFromZodSchema = <S extends z.AnyZodObject>(schema: S) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const val = value as any
 
+    // TODO: it would be cool to add a reference to another Zod schema whenever
+    // we have a nested object. Something like a footnote or a link to another
+    // markdown table.
+    //
+    // To make it work, I think we need to:
+    // 1. ask the user an array of ES modules where this library should look for
+    //    Zod schemas;
+    // 2. import each ESM dynamically;
+    // 3. find the Zod schema that matches this nested object description (but
+    //    what if the nested object has no description?)
+    // if (val instanceof z.ZodObject) {
+    //   console.log('=== val._def ===', val._def)
+    //   console.log('=== val.description ===', val.description)
+    // }
+
     let description: string = ''
     if (val instanceof z.ZodArray) {
       //   console.log('=== ZodArray ===', val)
@@ -81,13 +96,13 @@ export const arrayFromZodSchema = <S extends z.AnyZodObject>(schema: S) => {
 export const stringify = (x: any) => {
   // eslint-enable @typescript-eslint/no-explicit-any
   if (x === true || x === false || x === null || x === undefined) {
-    return x
+    return `\`${x}\``
   }
 
   if (x.length === 0) {
-    return '[]'
+    return `\`[]\``
   } else {
-    return JSON.stringify(x)
+    return `\`${JSON.stringify(x, null, 2)}\``
   }
 }
 
@@ -107,13 +122,24 @@ export const markdownTableFromZodSchema = <S extends z.AnyZodObject>(
   debug(`Zod schema => markdown table`)
   const header = [`| Key | Default | Description |`, `|---|---|---|`]
 
-  const res = arrayFromZodSchema(schema)
+  // Zod schemas that have a default value lose their .shape property. I find
+  // this behavior quite weird and doesn't make much sense to me. I couldn't
+  // find any documentation about this behavior, nor the reasoning behind this
+  // design decision.
+  let schema_without_default: S
+  if (schema instanceof z.ZodDefault) {
+    schema_without_default = schema.removeDefault()
+  } else {
+    schema_without_default = schema
+  }
+
+  const res = arrayFromZodSchema(schema_without_default)
   if (res.error) {
     return { error: res.error }
   }
 
   const rows = res.value.map((d) => {
-    return `| \`${d.key}\` | \`${stringify(d.default)}\` | ${d.description || ''} |`
+    return `| \`${d.key}\` | ${stringify(d.default)} | ${d.description || ''} |`
   })
 
   return { value: [...header, ...rows].join('\n') }
