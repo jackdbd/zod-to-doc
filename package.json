@@ -106,6 +106,7 @@
     "publint": "^0.2.7",
     "rimraf": "^5.0.5",
     "semantic-release": "^23.0.0",
+    "semantic-release-telegram": "^1.6.2",
     "tsm": "^2.3.0",
     "typedoc": "^0.25.7",
     "typedoc-plugin-zod": "^1.1.2",
