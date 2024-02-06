@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## [1.0.7](https://github.com/jackdbd/zod-to-doc/compare/v1.0.6...v1.0.7) (2024-02-06)
+
+
+### Bug Fixes
+
+* add ansi-colors for color output ([e6db552](https://github.com/jackdbd/zod-to-doc/commit/e6db552536a8d5152f1413e7de44c0d087ef6297))
+* update link to issue a bug report ([0385698](https://github.com/jackdbd/zod-to-doc/commit/03856983298c6ce3071f30b7cb0a90a1ece00a7a))
+
 ## [1.0.6](https://github.com/jackdbd/zod-to-doc/compare/v1.0.5...v1.0.6) (2024-02-06)
 
 
