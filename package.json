@@ -29,12 +29,12 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/lib.js",
-      "types": "./dist/lib.d.ts"
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.js"
     },
     "./lib": {
-      "import": "./dist/lib.js",
-      "types": "./dist/lib.d.ts"
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.js"
     },
     "./package.json": "./package.json"
   },
@@ -56,7 +56,7 @@
   ],
   "scripts": {
     "ae:local": "api-extractor run --config ./config/api-extractor.json --verbose --local",
-    "build": "run-s 'build:ts' 'docs' 'readme' --print-label",
+    "build": "run-s 'build:ts' 'docs' 'readme' 'publint' --print-label",
     "build:ts": "tsc -p tsconfig.json",
     "build:ts:watch": "tsc -p tsconfig.json --watch",
     "clean": "rimraf coverage/lcov.info dist/ tsconfig.tsbuildinfo",
@@ -73,6 +73,7 @@
     "format": "prettier --config ./config/prettier.cjs --write ./config/**/*.{cjs,json} ./src/**/*.ts ./test/**/*.mjs",
     "lint": "eslint --config ./config/eslint.cjs",
     "nuke": "npm run clean && rimraf node_modules 'package-lock.json'",
+    "publint": "publint run .",
     "readme": "npm run example && tsm readme.ts",
     "release:dry": "semantic-release --debug --dry-run --no-ci",
     "size": "pkg-size ./dist --sort-by=brotli --ignore-files '{*.d.ts,*.map}'",
@@ -102,6 +103,7 @@
     "npm-run-all": "^4.1.5",
     "pkg-size": "^2.4.0",
     "prettier": "^3.2.4",
+    "publint": "^0.2.7",
     "rimraf": "^5.0.5",
     "semantic-release": "^23.0.0",
     "tsm": "^2.3.0",

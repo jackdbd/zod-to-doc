@@ -86,6 +86,8 @@ jobs:
           hide-files: '{api-docs/**,docs/**,*.d.ts,*.map}'
           unchanged-files: show
       
+      - run: npx publint run .
+
       - name: 🚀 Release to npmjs
         if: ${{ matrix.os == 'ubuntu-latest' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/canary') }}
         env:
