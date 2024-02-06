@@ -105,6 +105,13 @@ const commit_analyzer = [
   }
 ]
 
+const exec = [
+  '@semantic-release/exec',
+  {
+    verifyConditionsCmd: 'npx publint run .'
+  }
+]
+
 // https://github.com/semantic-release/release-notes-generator
 const release_notes_generator = [
   '@semantic-release/release-notes-generator',
@@ -133,6 +140,7 @@ const telegram = [
 module.exports = {
   changelog,
   commit_analyzer,
+  exec,
   git,
   github,
   npm,

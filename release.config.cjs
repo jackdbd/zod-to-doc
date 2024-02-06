@@ -4,6 +4,7 @@
 const {
   changelog,
   commit_analyzer,
+  exec,
   git,
   github,
   npm,
@@ -25,6 +26,7 @@ const config = {
     commit_analyzer,
     release_notes_generator,
     telegram,
+    exec,
     changelog,
     npm,
     github,
@@ -32,6 +34,6 @@ const config = {
   ]
 }
 
-console.log('=== semantic-release ===', config)
+// console.log('=== semantic-release ===', config)
 
 module.exports = config
