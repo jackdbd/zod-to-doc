@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.0.6-canary.1](https://github.com/jackdbd/zod-to-doc/compare/v1.0.5...v1.0.6-canary.1) (2024-02-06)
+
+
+### Bug Fixes
+
+* add semantic-release-telegram plugin ([c2da384](https://github.com/jackdbd/zod-to-doc/commit/c2da38437aa9660e630289c9a5fe706930eae2a5))
+
 ## [1.0.5](https://github.com/jackdbd/zod-to-doc/compare/v1.0.4...v1.0.5) (2024-02-06)
 
 
