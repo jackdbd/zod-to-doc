@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.0.6-canary.3](https://github.com/jackdbd/zod-to-doc/compare/v1.0.6-canary.2...v1.0.6-canary.3) (2024-02-06)
+
+
+### Bug Fixes
+
+* avoid throwing exceptions, better error messages ([d454274](https://github.com/jackdbd/zod-to-doc/commit/d4542740ffbfe3de20df8be9e00651990d600486))
+
 ## [1.0.6-canary.2](https://github.com/jackdbd/zod-to-doc/compare/v1.0.6-canary.1...v1.0.6-canary.2) (2024-02-06)
 
 
