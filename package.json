@@ -1,6 +1,6 @@
 {
   "name": "@jackdbd/zod-to-doc",
-  "version": "1.0.5",
+  "version": "1.0.6-canary.3",
   "description": "Inject your [Zod](https://github.com/colinhacks/zod) schemas into your docs.",
   "author": {
     "name": "Giacomo Debidda",
@@ -91,6 +91,7 @@
     "@microsoft/api-documenter": "^7.23.20",
     "@microsoft/api-extractor": "^7.39.4",
     "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@thi.ng/transclude": "^0.1.63",
     "@types/debug": "^4.1.12",
@@ -106,6 +107,7 @@
     "publint": "^0.2.7",
     "rimraf": "^5.0.5",
     "semantic-release": "^23.0.0",
+    "semantic-release-telegram": "^1.6.2",
     "tsm": "^2.3.0",
     "typedoc": "^0.25.7",
     "typedoc-plugin-zod": "^1.1.2",

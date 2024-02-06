@@ -73,6 +73,8 @@ jobs:
           fail_ci_if_error: false
           files: ./coverage/lcov.info
           verbose: true
+      
+      - run: npx publint run .
 
       - name: 📦 Size report
         if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu-latest' }}
@@ -85,8 +87,6 @@ jobs:
           # ignore all docs, TS type definitions and JS/TS source maps
           hide-files: '{api-docs/**,docs/**,*.d.ts,*.map}'
           unchanged-files: show
-      
-      - run: npx publint run .
 
       - name: 🚀 Release to npmjs
         if: ${{ matrix.os == 'ubuntu-latest' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/canary') }}
@@ -94,6 +94,9 @@ jobs:
           # This github token must allow to push to this GitHub repository.
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_NPM_TOKEN }}
+          TELEGRAM_BOT_ID: ${{ secrets.TELEGRAM_BOT_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ fromJSON(secrets.TELEGRAM).chat_id }}
         run: npx semantic-release --ci
 
   macos-build-test:

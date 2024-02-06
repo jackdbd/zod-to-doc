@@ -4,11 +4,13 @@
 const {
   changelog,
   commit_analyzer,
+  exec,
   git,
   github,
   npm,
-  release_notes_generator
-} = require('./semantic-release-plugins.cjs')
+  release_notes_generator,
+  telegram
+} = require('./config/semantic-release-plugins.cjs')
 
 const config = {
   // https://semantic-release.gitbook.io/semantic-release/usage/configuration#branches
@@ -16,12 +18,15 @@ const config = {
 
   ci: true,
 
-  // The git plugin must be called AFTER the npm plugin.
+  // IMPORTANT! The order of plugin matters:
+  // - The git plugin must be called AFTER the npm plugin
   // https://github.com/semantic-release/git#examples
   // https://semantic-release.gitbook.io/semantic-release/support/faq#why-is-the-package.jsons-version-not-updated-in-my-repository
   plugins: [
     commit_analyzer,
     release_notes_generator,
+    telegram,
+    exec,
     changelog,
     npm,
     github,

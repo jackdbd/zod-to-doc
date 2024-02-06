@@ -5,13 +5,26 @@ import path from 'node:path'
 import defDebug from 'debug'
 import yargs from 'yargs/yargs'
 import { markdownTableFromZodSchema } from './lib.js'
-import { CLI_NAME, DEBUG_PREFIX } from './constants.js'
+import {
+  CLI_NAME,
+  DEBUG_PREFIX,
+  INFO_PREFIX,
+  LINK_ISSUE_BUG,
+  LINK_ISSUE_ENHANCEMENT
+} from './constants.js'
+import {
+  couldNotGenerateTable,
+  documentNotFound,
+  esModuleNotFound,
+  placeholderNotFound,
+  schemaNotFound
+} from './error-messages.js'
 
 const debug = defDebug(`${DEBUG_PREFIX}:cli`)
 
 const argv = await yargs(process.argv.slice(2))
   .usage(
-    './$0 - Generate a markdown table from a Zod schema and write it to a file'
+    `$0 - Generate a markdown table from a Zod schema and write it to a file`
   )
   .option('module', {
     alias: 'm',
@@ -55,30 +68,40 @@ const argv = await yargs(process.argv.slice(2))
   )
   .help('help')
   .wrap(80)
-  .epilogue('For more information, see https://github.com/jackdbd/zod-to-doc')
-  .argv
+  .epilogue(
+    [
+      `Documenation:\nhttps://github.com/jackdbd/zod-to-doc`,
+      `Found a bug? Please submit it here:\n${LINK_ISSUE_BUG}`,
+      `Feature requests & suggestions:\n${LINK_ISSUE_ENHANCEMENT}`
+    ].join('\n\n')
+  ).argv
 
 const module_filepath = path.join(process.env.PWD!, argv.module)
 if (!fs.existsSync(module_filepath)) {
-  throw new Error(`Module containing Zod schemas not found: ${module_filepath}`)
+  console.error(esModuleNotFound(module_filepath))
+  process.exit(1)
 }
 
 const es_module = await import(module_filepath)
 const schema = es_module[argv.schema]
+if (!schema) {
+  console.error(schemaNotFound(argv.schema, module_filepath))
+  process.exit(1)
+}
 debug(`import { ${argv.schema} } from '${module_filepath}'`)
 
 const { error, value: table } = markdownTableFromZodSchema(schema)
 if (error) {
-  const message = `Could not generate table from Zod schema: ${error.message}`
-  console.error(error)
-  throw new Error(message)
+  console.error(couldNotGenerateTable(error))
+  process.exit(1)
 }
 debug(`table generated from Zod schema`)
 debug(table)
 
 const doc_filepath = path.join(process.env.PWD!, argv.filepath)
 if (!fs.existsSync(doc_filepath)) {
-  throw new Error(`Document file not found: ${doc_filepath}`)
+  console.error(documentNotFound(doc_filepath))
+  process.exit(1)
 }
 
 debug(`read ${doc_filepath}`)
@@ -95,8 +118,8 @@ const tip = `<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN ${CLI_NAME} TO UPDATE 
 const i_begin = str.indexOf(placeholder_begin)
 const i_end = str.indexOf(placeholder_end) + placeholder_end.length
 if (i_begin === -1) {
-  const detail = `Please make sure to put both ${placeholder_begin} and ${placeholder_end} in ${doc_filepath}`
-  throw new Error(`Placeholder not found\n${detail}`)
+  console.error(placeholderNotFound(argv.placeholder, doc_filepath))
+  process.exit(1)
 }
 
 const before = str.substring(0, i_begin).trimEnd()
@@ -116,13 +139,13 @@ splits.push(after)
 const md = splits.join('')
 
 if (argv['dry-run']) {
-  console.log(
-    `${doc_filepath} not modified because of --dry-run. Here is how it would look like:`
+  console.info(
+    `${INFO_PREFIX} ${doc_filepath} not modified because of --dry-run. Here is how it would look like:`
   )
   console.log(`=== BEGIN ${doc_filepath} ===`)
   console.log(md)
   console.log(`=== END ${doc_filepath} ===`)
 } else {
   fs.writeFileSync(doc_filepath, md)
-  console.log(`${doc_filepath} updated`)
+  console.info(`${INFO_PREFIX} ${doc_filepath} updated`)
 }

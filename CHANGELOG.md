@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## [1.0.6-canary.3](https://github.com/jackdbd/zod-to-doc/compare/v1.0.6-canary.2...v1.0.6-canary.3) (2024-02-06)
+
+
+### Bug Fixes
+
+* avoid throwing exceptions, better error messages ([d454274](https://github.com/jackdbd/zod-to-doc/commit/d4542740ffbfe3de20df8be9e00651990d600486))
+
+## [1.0.6-canary.2](https://github.com/jackdbd/zod-to-doc/compare/v1.0.6-canary.1...v1.0.6-canary.2) (2024-02-06)
+
+
+### Bug Fixes
+
+* add semantic-release exec plugin ([b082bd4](https://github.com/jackdbd/zod-to-doc/commit/b082bd442e4132e1d28bb631ff7b0f325ead66d3))
+
+## [1.0.6-canary.1](https://github.com/jackdbd/zod-to-doc/compare/v1.0.5...v1.0.6-canary.1) (2024-02-06)
+
+
+### Bug Fixes
+
+* add semantic-release-telegram plugin ([c2da384](https://github.com/jackdbd/zod-to-doc/commit/c2da38437aa9660e630289c9a5fe706930eae2a5))
+
 ## [1.0.5](https://github.com/jackdbd/zod-to-doc/compare/v1.0.4...v1.0.5) (2024-02-06)
 
 
