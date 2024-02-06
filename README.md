@@ -101,6 +101,7 @@ export DEBUG=ztd:*
 
 | Package | Version |
 |---|---|
+| [ansi-colors](https://www.npmjs.com/package/ansi-colors) | `^4.1.3` |
 | [debug](https://www.npmjs.com/package/debug) | `^4.3.4` |
 | [yargs](https://www.npmjs.com/package/yargs) | `^17.7.2` |
 | [zod](https://www.npmjs.com/package/zod) | `^3.22.4` |

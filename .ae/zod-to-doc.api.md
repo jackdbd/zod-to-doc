@@ -19,9 +19,9 @@ export const arrayFromZodSchema: <S extends z.AnyZodObject>(schema: S) => {
     error?: undefined;
 };
 
-// Warning: (ae-missing-release-tag) "defaultZodValue" is part of the package's API, but it is missing a release tag (@alpha, @beta, @public, or @internal)
+// Warning: (ae-internal-missing-underscore) The name "defaultZodValue" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @public (undocumented)
+// @internal (undocumented)
 export const defaultZodValue: (value: any) => any;
 
 // @public

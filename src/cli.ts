@@ -2,6 +2,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import c from 'ansi-colors'
 import defDebug from 'debug'
 import yargs from 'yargs/yargs'
 import { markdownTableFromZodSchema } from './lib.js'
@@ -77,21 +78,21 @@ const argv = await yargs(process.argv.slice(2))
 
 const module_filepath = path.join(process.env.PWD!, argv.module)
 if (!fs.existsSync(module_filepath)) {
-  console.error(esModuleNotFound(module_filepath))
+  console.error(c.red(esModuleNotFound(module_filepath)))
   process.exit(1)
 }
 
 const es_module = await import(module_filepath)
 const schema = es_module[argv.schema]
 if (!schema) {
-  console.error(schemaNotFound(argv.schema, module_filepath))
+  console.error(c.red(schemaNotFound(argv.schema, module_filepath)))
   process.exit(1)
 }
 debug(`import { ${argv.schema} } from '${module_filepath}'`)
 
 const { error, value: table } = markdownTableFromZodSchema(schema)
 if (error) {
-  console.error(couldNotGenerateTable(error))
+  console.error(c.red(couldNotGenerateTable(error)))
   process.exit(1)
 }
 debug(`table generated from Zod schema`)
@@ -99,7 +100,7 @@ debug(table)
 
 const doc_filepath = path.join(process.env.PWD!, argv.filepath)
 if (!fs.existsSync(doc_filepath)) {
-  console.error(documentNotFound(doc_filepath))
+  console.error(c.red(documentNotFound(doc_filepath)))
   process.exit(1)
 }
 
@@ -117,7 +118,7 @@ const tip = `<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN ${CLI_NAME} TO UPDATE 
 const i_begin = str.indexOf(placeholder_begin)
 const i_end = str.indexOf(placeholder_end) + placeholder_end.length
 if (i_begin === -1) {
-  console.error(placeholderNotFound(argv.placeholder, doc_filepath))
+  console.error(c.red(placeholderNotFound(argv.placeholder, doc_filepath)))
   process.exit(1)
 }
 
@@ -139,12 +140,14 @@ const md = splits.join('')
 
 if (argv['dry-run']) {
   console.info(
-    `${INFO_PREFIX} ${doc_filepath} not modified because of --dry-run. Here is how it would look like:`
+    c.blue(
+      `${INFO_PREFIX} ${doc_filepath} not modified because of --dry-run. Here is how it would look like:`
+    )
   )
   console.log(`=== BEGIN ${doc_filepath} ===`)
   console.log(md)
   console.log(`=== END ${doc_filepath} ===`)
 } else {
   fs.writeFileSync(doc_filepath, md)
-  console.info(`${INFO_PREFIX} ${doc_filepath} updated`)
+  console.info(c.blue(`${INFO_PREFIX} ${doc_filepath} updated`))
 }
