@@ -29,9 +29,6 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/cli.js"
-    },
-    "./lib": {
       "types": "./dist/lib.d.ts",
       "import": "./dist/lib.js"
     },
@@ -71,12 +68,13 @@
     "nuke": "npm run clean && rimraf node_modules 'package-lock.json'",
     "readme": "npm run example && tsm readme.ts",
     "release:dry": "semantic-release --debug --dry-run --no-ci",
-    "size": "pkg-size ./dist --sort-by=brotli --ignore-files {*.d.ts,*.map}",
-    "test": "node --test --experimental-test-coverage",
+    "size": "pkg-size ./dist --sort-by=brotli --ignore-files '{*.d.ts,*.map}'",
+    "test": "node --test --experimental-test-coverage --test-name-pattern=cli",
     "test:ci": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info",
     "test:watch": "node --test --watch"
   },
   "dependencies": {
+    "debug": "^4.3.4",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -90,7 +88,6 @@
     "@types/debug": "^4.1.12",
     "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
-    "debug": "^4.3.4",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
