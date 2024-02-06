@@ -29,13 +29,20 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/lib.d.ts",
-      "import": "./dist/lib.js"
+      "import": "./dist/lib.js",
+      "types": "./dist/lib.d.ts"
+    },
+    "./lib": {
+      "import": "./dist/lib.js",
+      "types": "./dist/lib.d.ts"
     },
     "./package.json": "./package.json"
   },
   "typesVersions": {
     ">=4.0": {
+      "index": [
+        "./dist/lib.d.ts"
+      ],
       "*": [
         "./dist/*.d.ts"
       ]
