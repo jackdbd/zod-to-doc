@@ -54,10 +54,6 @@ Zod to Doc can also be used as a library. For example, the [readme.ts](https://g
 
 {{table.tire}}
 
-#### Dealership
-
-{{table.dealership}}
-
 <!-- include troubleshooting.md -->
 
 {{pkg.deps}}

@@ -18,7 +18,6 @@ Inject your [Zod](https://github.com/colinhacks/zod) schemas into your docs.
     - [Car table](#car-table)
   - [Usage as a library](#usage-as-a-library)
     - [Car tire table](#car-tire-table)
-    - [Dealership](#dealership)
 - [Troubleshooting](#troubleshooting)
 - [Dependencies](#dependencies)
 - [License](#license)
@@ -86,15 +85,6 @@ Zod to Doc can also be used as a library. For example, the [readme.ts](https://g
 | `manufacturer` | `undefined` | Car tire manufacturer |
 | `pressure` | `30` | Car tire pressure in PSI |
 
-#### Dealership
-
-| Key | Default | Description |
-|---|---|---|
-| `owner` | `undefined` | Owner of the dealership |
-| `employees` | `undefined` | Employees of the dealership (1 to ∞ elements) |
-| `cars` | `[]` | Cars sold by the dealership |
-| `motorcycles` | `[]` | Motorcycles sold by the dealership |
-
 ## Troubleshooting
 
 This package uses the [debug](https://github.com/debug-js/debug) library for logging.
@@ -112,6 +102,7 @@ export DEBUG=ztd:*
 | Package | Version |
 |---|---|
 | [debug](https://www.npmjs.com/package/debug) | `^4.3.4` |
+| [yargs](https://www.npmjs.com/package/yargs) | `^17.7.2` |
 | [zod](https://www.npmjs.com/package/zod) | `^3.22.4` |
 
 ## License

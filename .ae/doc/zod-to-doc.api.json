@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.39.4",
+    "toolVersion": "7.39.5",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -211,29 +211,6 @@
           "variableTypeTokenRange": {
             "startIndex": 1,
             "endIndex": 6
-          }
-        },
-        {
-          "kind": "Variable",
-          "canonicalReference": "@jackdbd/zod-to-doc!defaultZodValue:var",
-          "docComment": "",
-          "excerptTokens": [
-            {
-              "kind": "Content",
-              "text": "defaultZodValue: "
-            },
-            {
-              "kind": "Content",
-              "text": "(value: any) => any"
-            }
-          ],
-          "fileUrlPath": "src/lib.ts",
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "defaultZodValue",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 2
           }
         },
         {

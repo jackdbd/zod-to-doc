@@ -9,8 +9,12 @@ import { DEBUG_PREFIX } from './constants.js'
 
 const debug = defDebug(`${DEBUG_PREFIX}:lib`)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable @typescript-eslint/no-explicit-any
+/**
+ * @internal
+ */
 export const defaultZodValue = (value: any) => {
+  // eslint-enable @typescript-eslint/no-explicit-any
   if (value instanceof z.ZodDefault) {
     return value._def.defaultValue()
   } else {
@@ -42,7 +46,6 @@ export const arrayFromZodSchema = <S extends z.AnyZodObject>(schema: S) => {
 
     let description: string = ''
     if (val instanceof z.ZodArray) {
-      //   console.log('=== ZodArray ===', val)
       const exactLength = val._def.exactLength && val._def.exactLength.value
       const minLength = val._def.minLength ? `${val._def.minLength.value}` : 0
       const maxLength = val._def.maxLength ? `${val._def.maxLength.value}` : '∞'
@@ -53,7 +56,6 @@ export const arrayFromZodSchema = <S extends z.AnyZodObject>(schema: S) => {
       }
 
       if (val._def.type instanceof z.ZodObject) {
-        // console.log('=== ZodObject ===', val._def.type)
         if (val.description) {
           description = exactLength
             ? `${val.description} (${exactLength} elements)`
