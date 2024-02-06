@@ -1,6 +1,7 @@
 import assert from 'node:assert'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import * as process from 'node:process'
 import { execPath as node } from 'node:process'
 import { describe, it } from 'node:test'
 import { promisify } from 'node:util'
@@ -14,6 +15,7 @@ const package_json = JSON.parse(readFileSync(resolve('package.json')))
 
 const onGithub = () => (process.env.GITHUB_SHA ? true : false)
 
+// FIXME: https://github.com/jackdbd/zod-to-doc/issues/3
 const skip = onGithub()
   ? `skipped on GitHub because of error: /Users/runner/work/zod-to-doc/zod-to-doc/dist/cli.js EACCES`
   : false

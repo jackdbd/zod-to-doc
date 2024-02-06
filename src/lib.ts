@@ -34,16 +34,7 @@ export const arrayFromZodSchema = <S extends z.AnyZodObject>(schema: S) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const val = value as any
 
-    // TODO: it would be cool to add a reference to another Zod schema whenever
-    // we have a nested object. Something like a footnote or a link to another
-    // markdown table.
-    //
-    // To make it work, I think we need to:
-    // 1. ask the user an array of ES modules where this library should look for
-    //    Zod schemas;
-    // 2. import each ESM dynamically;
-    // 3. find the Zod schema that matches this nested object description (but
-    //    what if the nested object has no description?)
+    // TODO: https://github.com/jackdbd/zod-to-doc/issues/4
     // if (val instanceof z.ZodObject) {
     //   console.log('=== val._def ===', val._def)
     //   console.log('=== val.description ===', val.description)
