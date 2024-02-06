@@ -11,7 +11,7 @@ const debug = defDebug(`${DEBUG_PREFIX}:cli`)
 
 const argv = await yargs(process.argv.slice(2))
   .usage(
-    './$0 - Generated a markdown table from a Zod schema and write it to a file'
+    './$0 - Generate a markdown table from a Zod schema and write it to a file'
   )
   .option('module', {
     alias: 'm',
