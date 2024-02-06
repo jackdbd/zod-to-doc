@@ -9,8 +9,8 @@ import {
   CLI_NAME,
   DEBUG_PREFIX,
   INFO_PREFIX,
-  LINK_ISSUE_BUG,
-  LINK_ISSUE_ENHANCEMENT
+  LINK_BUGS,
+  LINK_ENHANCEMENTS
 } from './constants.js'
 import {
   couldNotGenerateTable,
@@ -70,9 +70,8 @@ const argv = await yargs(process.argv.slice(2))
   .wrap(80)
   .epilogue(
     [
-      `Documenation:\nhttps://github.com/jackdbd/zod-to-doc`,
-      `Found a bug? Please submit it here:\n${LINK_ISSUE_BUG}`,
-      `Feature requests & suggestions:\n${LINK_ISSUE_ENHANCEMENT}`
+      `Bugs:\n${LINK_BUGS}`,
+      `Feature requests & suggestions:\n${LINK_ENHANCEMENTS}`
     ].join('\n\n')
   ).argv
 

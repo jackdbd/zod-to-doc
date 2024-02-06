@@ -1,7 +1,7 @@
-import { ERROR_PREFIX, LINK_ISSUE_BUG } from './constants.js'
+import { ERROR_PREFIX, LINK_ISSUE_BUG_REPORT } from './constants.js'
 
 // Call To Action to encourage users to submit a bug report in case of an error
-const CTA_BUG = `Do you think this is a bug? Please submit an issue here: ${LINK_ISSUE_BUG}`
+const CTA_BUG = `Do you think this is a bug? Please submit a bug report:\n${LINK_ISSUE_BUG_REPORT}`
 
 export const esModuleNotFound = (filepath: string) => {
   const summary = `${ERROR_PREFIX} ES module not found`
