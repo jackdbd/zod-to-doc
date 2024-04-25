@@ -2,7 +2,7 @@
 
 [Home](./index.md) &gt; [@jackdbd/zod-to-doc](./zod-to-doc.md) &gt; [markdownTableFromZodSchema](./zod-to-doc.markdowntablefromzodschema.md)
 
-## markdownTableFromZodSchema variable
+## markdownTableFromZodSchema() function
 
 Creates a markdown table from a Zod schema.
 
@@ -17,3 +17,43 @@ markdownTableFromZodSchema: <S extends z.AnyZodObject>(schema: S) => {
     error?: undefined;
 }
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+schema
+
+
+</td><td>
+
+S
+
+
+</td><td>
+
+The Zod schema to convert.
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+{ error: Error; value?: undefined; } \| { value: string; error?: undefined; }
+

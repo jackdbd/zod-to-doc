@@ -1,7 +1,7 @@
 {
   "metadata": {
     "toolPackage": "@microsoft/api-extractor",
-    "toolVersion": "7.39.5",
+    "toolVersion": "7.43.1",
     "schemaVersion": 1011,
     "oldestForwardsCompatibleVersion": 1001,
     "tsdocConfig": {
@@ -173,17 +173,13 @@
       "preserveMemberOrder": false,
       "members": [
         {
-          "kind": "Variable",
-          "canonicalReference": "@jackdbd/zod-to-doc!arrayFromZodSchema:var",
+          "kind": "Function",
+          "canonicalReference": "@jackdbd/zod-to-doc!arrayFromZodSchema:function(1)",
           "docComment": "/**\n * Converts a Zod schema into an array of objects.\n *\n * @public @experimental\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "arrayFromZodSchema: "
-            },
-            {
-              "kind": "Content",
-              "text": "<S extends "
+              "text": "arrayFromZodSchema: <S extends "
             },
             {
               "kind": "Reference",
@@ -192,7 +188,19 @@
             },
             {
               "kind": "Content",
-              "text": ">(schema: S) => {\n    error: "
+              "text": ">(schema: "
+            },
+            {
+              "kind": "Content",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    error: "
             },
             {
               "kind": "Reference",
@@ -205,26 +213,45 @@
             }
           ],
           "fileUrlPath": "src/lib.ts",
-          "isReadonly": true,
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 8
+          },
           "releaseTag": "Public",
-          "name": "arrayFromZodSchema",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 6
-          }
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "schema",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "S",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "arrayFromZodSchema"
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@jackdbd/zod-to-doc!arrayFromZodUnion:var",
+          "kind": "Function",
+          "canonicalReference": "@jackdbd/zod-to-doc!arrayFromZodUnion:function(1)",
           "docComment": "/**\n * Converts a Zod union into an array of strings.\n *\n * @public @experimental\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "arrayFromZodUnion: "
-            },
-            {
-              "kind": "Content",
-              "text": "<S extends "
+              "text": "arrayFromZodUnion: <S extends "
             },
             {
               "kind": "Reference",
@@ -251,7 +278,23 @@
             },
             {
               "kind": "Content",
-              "text": "[]]>>(schema: S) => {\n    error: "
+              "text": "[]]>"
+            },
+            {
+              "kind": "Content",
+              "text": ">(schema: "
+            },
+            {
+              "kind": "Content",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    error: "
             },
             {
               "kind": "Reference",
@@ -264,26 +307,45 @@
             }
           ],
           "fileUrlPath": "src/lib.ts",
-          "isReadonly": true,
+          "returnTypeTokenRange": {
+            "startIndex": 10,
+            "endIndex": 13
+          },
           "releaseTag": "Public",
-          "name": "arrayFromZodUnion",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 10
-          }
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "schema",
+              "parameterTypeTokenRange": {
+                "startIndex": 8,
+                "endIndex": 9
+              },
+              "isOptional": false
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "S",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 7
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "arrayFromZodUnion"
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@jackdbd/zod-to-doc!markdownTableFromZodSchema:var",
+          "kind": "Function",
+          "canonicalReference": "@jackdbd/zod-to-doc!markdownTableFromZodSchema:function(1)",
           "docComment": "/**\n * Creates a markdown table from a Zod schema.\n *\n * @param schema - The Zod schema to convert.\n *\n * @see\n *\n * [Zod discussions #1953 - Retrieve default values from schema](https://github.com/colinhacks/zod/discussions/1953)\n *\n * @public @experimental\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "markdownTableFromZodSchema: "
-            },
-            {
-              "kind": "Content",
-              "text": "<S extends "
+              "text": "markdownTableFromZodSchema: <S extends "
             },
             {
               "kind": "Reference",
@@ -292,7 +354,19 @@
             },
             {
               "kind": "Content",
-              "text": ">(schema: S) => {\n    error: "
+              "text": ">(schema: "
+            },
+            {
+              "kind": "Content",
+              "text": "S"
+            },
+            {
+              "kind": "Content",
+              "text": ") => "
+            },
+            {
+              "kind": "Content",
+              "text": "{\n    error: "
             },
             {
               "kind": "Reference",
@@ -305,26 +379,45 @@
             }
           ],
           "fileUrlPath": "src/lib.ts",
-          "isReadonly": true,
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 8
+          },
           "releaseTag": "Public",
-          "name": "markdownTableFromZodSchema",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
-            "endIndex": 6
-          }
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "schema",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": false
+            }
+          ],
+          "typeParameters": [
+            {
+              "typeParameterName": "S",
+              "constraintTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "defaultTypeTokenRange": {
+                "startIndex": 0,
+                "endIndex": 0
+              }
+            }
+          ],
+          "name": "markdownTableFromZodSchema"
         },
         {
-          "kind": "Variable",
-          "canonicalReference": "@jackdbd/zod-to-doc!stringsFromZodAnyType:var",
+          "kind": "Function",
+          "canonicalReference": "@jackdbd/zod-to-doc!stringsFromZodAnyType:function(1)",
           "docComment": "/**\n * Converts any Zod type into an array of strings.\n *\n * @public @experimental\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "stringsFromZodAnyType: "
-            },
-            {
-              "kind": "Content",
-              "text": "(x: "
+              "text": "stringsFromZodAnyType: (x: "
             },
             {
               "kind": "Reference",
@@ -333,17 +426,31 @@
             },
             {
               "kind": "Content",
-              "text": ") => string[]"
+              "text": ") => "
+            },
+            {
+              "kind": "Content",
+              "text": "string[]"
             }
           ],
           "fileUrlPath": "src/lib.ts",
-          "isReadonly": true,
-          "releaseTag": "Public",
-          "name": "stringsFromZodAnyType",
-          "variableTypeTokenRange": {
-            "startIndex": 1,
+          "returnTypeTokenRange": {
+            "startIndex": 3,
             "endIndex": 4
-          }
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "x",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "stringsFromZodAnyType"
         }
       ]
     }

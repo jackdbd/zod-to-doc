@@ -2,7 +2,7 @@
 
 [Home](./index.md) &gt; [@jackdbd/zod-to-doc](./zod-to-doc.md) &gt; [stringsFromZodAnyType](./zod-to-doc.stringsfromzodanytype.md)
 
-## stringsFromZodAnyType variable
+## stringsFromZodAnyType() function
 
 Converts any Zod type into an array of strings.
 
@@ -11,3 +11,41 @@ Converts any Zod type into an array of strings.
 ```typescript
 stringsFromZodAnyType: (x: ZodTypeAny) => string[]
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+x
+
+
+</td><td>
+
+ZodTypeAny
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+string\[\]
+

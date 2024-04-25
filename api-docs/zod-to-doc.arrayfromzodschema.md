@@ -2,7 +2,7 @@
 
 [Home](./index.md) &gt; [@jackdbd/zod-to-doc](./zod-to-doc.md) &gt; [arrayFromZodSchema](./zod-to-doc.arrayfromzodschema.md)
 
-## arrayFromZodSchema variable
+## arrayFromZodSchema() function
 
 Converts a Zod schema into an array of objects.
 
@@ -21,3 +21,41 @@ arrayFromZodSchema: <S extends z.AnyZodObject>(schema: S) => {
     error?: undefined;
 }
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+schema
+
+
+</td><td>
+
+S
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+{ error: Error; value?: undefined; } \| { value: { key: string; default: any; description: string; }\[\]; error?: undefined; }
+

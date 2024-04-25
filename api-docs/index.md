@@ -6,7 +6,24 @@
 
 ## Packages
 
-|  Package | Description |
-|  --- | --- |
-|  [@jackdbd/zod-to-doc](./zod-to-doc.md) |  |
+<table><thead><tr><th>
 
+Package
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[@jackdbd/zod-to-doc](./zod-to-doc.md)
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>

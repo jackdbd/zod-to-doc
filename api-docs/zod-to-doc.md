@@ -4,12 +4,61 @@
 
 ## zod-to-doc package
 
-## Variables
+## Functions
 
-|  Variable | Description |
-|  --- | --- |
-|  [arrayFromZodSchema](./zod-to-doc.arrayfromzodschema.md) | Converts a Zod schema into an array of objects. |
-|  [arrayFromZodUnion](./zod-to-doc.arrayfromzodunion.md) | Converts a Zod union into an array of strings. |
-|  [markdownTableFromZodSchema](./zod-to-doc.markdowntablefromzodschema.md) | Creates a markdown table from a Zod schema. |
-|  [stringsFromZodAnyType](./zod-to-doc.stringsfromzodanytype.md) | Converts any Zod type into an array of strings. |
+<table><thead><tr><th>
 
+Function
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+[arrayFromZodSchema(schema)](./zod-to-doc.arrayfromzodschema.md)
+
+
+</td><td>
+
+Converts a Zod schema into an array of objects.
+
+
+</td></tr>
+<tr><td>
+
+[arrayFromZodUnion(schema)](./zod-to-doc.arrayfromzodunion.md)
+
+
+</td><td>
+
+Converts a Zod union into an array of strings.
+
+
+</td></tr>
+<tr><td>
+
+[markdownTableFromZodSchema(schema)](./zod-to-doc.markdowntablefromzodschema.md)
+
+
+</td><td>
+
+Creates a markdown table from a Zod schema.
+
+
+</td></tr>
+<tr><td>
+
+[stringsFromZodAnyType(x)](./zod-to-doc.stringsfromzodanytype.md)
+
+
+</td><td>
+
+Converts any Zod type into an array of strings.
+
+
+</td></tr>
+</tbody></table>

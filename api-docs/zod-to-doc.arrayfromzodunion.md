@@ -2,7 +2,7 @@
 
 [Home](./index.md) &gt; [@jackdbd/zod-to-doc](./zod-to-doc.md) &gt; [arrayFromZodUnion](./zod-to-doc.arrayfromzodunion.md)
 
-## arrayFromZodUnion variable
+## arrayFromZodUnion() function
 
 Converts a Zod union into an array of strings.
 
@@ -17,3 +17,41 @@ arrayFromZodUnion: <S extends z.ZodUnion<readonly [z.ZodTypeAny, ...z.ZodTypeAny
     error?: undefined;
 }
 ```
+
+## Parameters
+
+<table><thead><tr><th>
+
+Parameter
+
+
+</th><th>
+
+Type
+
+
+</th><th>
+
+Description
+
+
+</th></tr></thead>
+<tbody><tr><td>
+
+schema
+
+
+</td><td>
+
+S
+
+
+</td><td>
+
+
+</td></tr>
+</tbody></table>
+**Returns:**
+
+{ error: Error; value?: undefined; } \| { value: string\[\]; error?: undefined; }
+
