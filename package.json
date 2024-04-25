@@ -61,7 +61,7 @@
     "build:ts:watch": "tsc -p tsconfig.json --watch",
     "clean": "rimraf coverage/lcov.info dist/ tsconfig.tsbuildinfo",
     "commitlint": "commitlint --config ./config/commitlint.cjs --to HEAD --verbose",
-    "dev": "run-p 'build:ts:watch' 'test:watch'",
+    "dev": "DEBUG='' run-p 'build:ts:watch' 'test:watch'",
     "preexample": "chmod u+x ./dist/cli.js",
     "example": "run-s 'example:car'",
     "example:car": "./dist/cli.js --module ./fixtures/schemas.mjs --schema car --placeholder car-table --title '#### Car table' --filepath tpl.readme.md",

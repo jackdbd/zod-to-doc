@@ -5,6 +5,7 @@
 ```ts
 
 import { z } from 'zod';
+import type { ZodTypeAny } from 'zod';
 
 // @public
 export const arrayFromZodSchema: <S extends z.AnyZodObject>(schema: S) => {
@@ -16,6 +17,15 @@ export const arrayFromZodSchema: <S extends z.AnyZodObject>(schema: S) => {
         default: any;
         description: string;
     }[];
+    error?: undefined;
+};
+
+// @public
+export const arrayFromZodUnion: <S extends z.ZodUnion<readonly [z.ZodTypeAny, ...z.ZodTypeAny[]]>>(schema: S) => {
+    error: Error;
+    value?: undefined;
+} | {
+    value: string[];
     error?: undefined;
 };
 
@@ -37,6 +47,9 @@ export const markdownTableFromZodSchema: <S extends z.AnyZodObject>(schema: S) =
 //
 // @internal (undocumented)
 export const stringify: (x: any) => string;
+
+// @public
+export const stringsFromZodAnyType: (x: ZodTypeAny) => string[];
 
 // (No @packageDocumentation comment for this package)
 

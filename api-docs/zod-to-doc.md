@@ -9,5 +9,7 @@
 |  Variable | Description |
 |  --- | --- |
 |  [arrayFromZodSchema](./zod-to-doc.arrayfromzodschema.md) | Converts a Zod schema into an array of objects. |
+|  [arrayFromZodUnion](./zod-to-doc.arrayfromzodunion.md) | Converts a Zod union into an array of strings. |
 |  [markdownTableFromZodSchema](./zod-to-doc.markdowntablefromzodschema.md) | Creates a markdown table from a Zod schema. |
+|  [stringsFromZodAnyType](./zod-to-doc.stringsfromzodanytype.md) | Converts any Zod type into an array of strings. |
 

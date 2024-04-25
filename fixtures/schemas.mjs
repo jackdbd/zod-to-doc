@@ -1,10 +1,43 @@
 import { z } from 'zod'
 
+export const color = z.union([
+  z.literal('red'),
+  z.literal('green').describe('The green color'),
+  z.literal('blue')
+])
+
+// https://zod.dev/?id=literals
+export const assorted_literals = z.union([
+  z.literal(),
+  z.literal().describe('An empty literal'),
+  z.literal(123).describe('The literal number `123`'),
+  z.literal(456),
+  z.literal(BigInt(9007199254740991)).describe('A very big number'),
+  z.literal('tuna').describe('The string `tuna`'),
+  z.literal(true).describe('The boolean `true`'),
+  z.literal(Symbol('terrific')).describe('The symbol `terrific`')
+])
+
+// https://zod.dev/?id=unions
+export const assorted_union = z.union([
+  z.literal('tuna').describe('The literal string `tuna`'),
+  z.boolean(),
+  z.literal(123).describe('The literal number `123`'),
+  z.literal(456),
+  z.number().min(5).max(9),
+  z.number().min(1).max(10).describe('A number between 1 and 10'),
+  z.bigint(),
+  z.string().min(3).max(5).describe('A string with 3 to 5 characters'),
+  z
+    .object({ foo: z.string(), color: color })
+    .describe('An object with a given description'),
+  z.object({ bar: z.string(), baz: z.number() })
+])
+
 export const car_manufacturer = z
   .literal('Ferrari')
   .or(z.literal('Ford'))
-  .or(z.literal('Ford'))
-  .or(z.literal('Honda'))
+  .or(z.literal('Honda').describe('The Honda car manufacturer'))
   .or(z.literal('Peugeot'))
   .or(z.literal('Toyota'))
   .or(z.literal('Volkswagen'))

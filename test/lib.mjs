@@ -3,14 +3,20 @@ import { describe, it } from 'node:test'
 import { z } from 'zod'
 import {
   arrayFromZodSchema,
+  arrayFromZodUnion,
   markdownTableFromZodSchema,
+  stringsFromZodAnyType,
   stringify
 } from '../dist/lib.js'
 import {
+  assorted_literals,
+  assorted_union,
   car,
   car_manufacturer,
   car_model,
   car_tire,
+  car_tire_manufacturer,
+  color,
   dealership,
   employee,
   year
@@ -121,6 +127,95 @@ describe('stringify', () => {
         assert.equal(splits.length - 1, 3)
       })
     })
+  })
+})
+
+describe('stringsFromZodAnyType', () => {
+  it('returns a sorted list of strings when passed a z.union() of string literals', () => {
+    const union = z.union([
+      z.literal('red'),
+      z.literal('green').describe('The green color'),
+      z.literal('blue')
+    ])
+
+    const arr = stringsFromZodAnyType(union)
+
+    assert.equal(arr[0], '`"blue"`')
+    assert.equal(arr[1], '`"green"` (The green color)')
+    assert.equal(arr[2], '`"red"`')
+  })
+
+  it('renders a sorted list of strings even when there are multiple levels of nested z.union()', () => {
+    const american_cars = z.union([z.literal('Dodge'), z.literal('Ford')])
+    const german_cars = z.union([z.literal('BMW'), z.literal('Volkswagen')])
+    const japanese_cars = z.union([
+      z.literal('Honda').describe('The Honda car manufacturer'),
+      z.literal('Subaru')
+    ])
+
+    const union = z.union([
+      z.literal('Aston Martin'),
+      z.literal('Ferrari'),
+      american_cars,
+      german_cars,
+      japanese_cars,
+      z.literal('Peugeut')
+    ])
+
+    const arr = stringsFromZodAnyType(union)
+
+    assert.equal(arr[0], '`"Aston Martin"`')
+    assert.equal(arr[1], '`"BMW"`')
+    assert.equal(arr[2], '`"Dodge"`')
+    assert.equal(arr[3], '`"Ferrari"`')
+    assert.equal(arr[4], '`"Ford"`')
+    assert.equal(arr[5], '`"Honda"` (The Honda car manufacturer)')
+    assert.equal(arr[6], '`"Peugeut"`')
+    assert.equal(arr[7], '`"Subaru"`')
+    assert.equal(arr[8], '`"Volkswagen"`')
+  })
+})
+
+describe('arrayFromZodUnion', () => {
+  it('returns a sorted list of strings when passed a z.union() of string literals', () => {
+    const union = z.union([
+      z.literal('red'),
+      z.literal('green').describe('The green color'),
+      z.literal('blue')
+    ])
+
+    const { error, value } = arrayFromZodUnion(union)
+
+    assert.equal(error, undefined)
+    assert.equal(value[0], '`"blue"`')
+    assert.equal(value[1], '`"green"` (The green color)')
+    assert.equal(value[2], '`"red"`')
+  })
+
+  it('returns a sorted list of strings even when there are multiple levels of nested z.union()', () => {
+    const american_cars = z.union([z.literal('Dodge'), z.literal('Ford')])
+
+    const french_cars = z.union([z.literal('Peugeut'), z.literal('Renault')])
+    const german_cars = z.union([z.literal('BMW'), z.literal('Volkswagen')])
+    const european_cars = z.union([
+      z.literal('Ferrari'),
+      french_cars,
+      german_cars
+    ])
+
+    const union = z.union([american_cars, european_cars, z.literal('Subaru')])
+
+    const { error, value } = arrayFromZodUnion(union)
+
+    assert.equal(error, undefined)
+    assert.equal(value[0], '`"BMW"`')
+    assert.equal(value[1], '`"Dodge"`')
+    assert.equal(value[2], '`"Ferrari"`')
+    assert.equal(value[3], '`"Ford"`')
+    assert.equal(value[4], '`"Peugeut"`')
+    assert.equal(value[5], '`"Renault"`')
+    assert.equal(value[6], '`"Subaru"`')
+    assert.equal(value[7], '`"Volkswagen"`')
   })
 })
 

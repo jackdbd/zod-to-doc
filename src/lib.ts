@@ -5,6 +5,7 @@
  */
 import defDebug from 'debug'
 import { z } from 'zod'
+import type { ZodTypeAny, ZodUnionOptions } from 'zod'
 import { DEBUG_PREFIX } from './constants.js'
 
 const debug = defDebug(`${DEBUG_PREFIX}:lib`)
@@ -23,6 +24,73 @@ export const defaultZodValue = (value: any) => {
 }
 
 /**
+ * Converts any Zod type into an array of strings.
+ *
+ * @public
+ * @experimental
+ */
+export const stringsFromZodAnyType = (x: ZodTypeAny) => {
+  if (x instanceof z.ZodBigInt) {
+    return x.description ? [x.description] : ['A BigInt']
+  } else if (x instanceof z.ZodBoolean) {
+    return x.description ? [x.description] : ['A Boolean']
+  } else if (x instanceof z.ZodLiteral) {
+    if (x.value) {
+      if (x.description) {
+        return [`${stringify(x.value)} (${x.description})`]
+      } else {
+        return [stringify(x.value)]
+      }
+    } else {
+      if (x.description) {
+        return [`A literal (${x.description})`]
+      } else {
+        return [`A literal`]
+      }
+    }
+  } else if (x instanceof z.ZodNumber) {
+    // TODO: get min,max from these checks?
+    // console.log('=== x._def.checks ===', x._def.checks)
+    return x.description ? [x.description] : ['A Number']
+  } else if (x instanceof z.ZodObject) {
+    // const res = arrayFromZodSchema(x as any)
+    return x.description ? [x.description] : ['An objects']
+  } else if (x instanceof z.ZodString) {
+    return x.description ? [x.description] : ['A String']
+  } else if (x instanceof z.ZodUnion) {
+    const arr: string[] = x.options.map((opt: z.ZodAny) => {
+      return stringsFromZodAnyType(opt)
+    })
+    const strings = arr.flat()
+    strings.sort()
+    return strings
+  } else {
+    // console.log('=== stringFromZodAnyType x._def ===', x._def)
+    return x.description ? [x.description] : ['TODO']
+  }
+}
+
+/**
+ * Converts a Zod union into an array of strings.
+ *
+ * @public
+ * @experimental
+ */
+export const arrayFromZodUnion = <S extends z.ZodUnion<ZodUnionOptions>>(
+  schema: S
+) => {
+  if (!schema.options) {
+    return { error: new Error(`schema.options is not defined.`) }
+  }
+
+  debug(`Zod schema.options => JS array`)
+  const arr = schema.options.map(stringsFromZodAnyType).flat()
+  arr.sort()
+
+  return { value: arr }
+}
+
+/**
  * Converts a Zod schema into an array of objects.
  *
  * @public
@@ -32,8 +100,7 @@ export const arrayFromZodSchema = <S extends z.AnyZodObject>(schema: S) => {
   if (!schema.shape) {
     return { error: new Error(`schema.shape is not defined.`) }
   }
-
-  debug(`Zod schema => JS array`)
+  debug(`Zod schema.shape => JS array`)
   const arr = Object.entries(schema.shape).map(([key, value]) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const val = value as any
@@ -90,6 +157,20 @@ export const stringify = (x: any) => {
   // eslint-enable @typescript-eslint/no-explicit-any
   if (x === true || x === false || x === null || x === undefined) {
     return `\`${x}\``
+  }
+
+  if (typeof x === 'bigint') {
+    // The trailing "n" is not part of the string.
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt/toString
+    // https://github.com/GoogleChromeLabs/jsbi/issues/30#issuecomment-521449285
+    return x.toString()
+  }
+
+  if (typeof x === 'symbol') {
+    // Because Symbol has a [@@toPrimitive]() method, that method always takes
+    // priority over toString() when a Symbol object is coerced to a string.
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol/toString
+    return x.toString()
   }
 
   if (x.length === 0) {

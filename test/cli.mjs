@@ -77,7 +77,7 @@ describe('cli', () => {
         const { stderr, stdout } = exception
 
         assert.equal(stdout, '')
-        assert.match(stderr, /Module containing Zod schemas not found/)
+        assert.match(stderr, /module not found/)
       }
     }
   )
