@@ -30,6 +30,16 @@ export const defaultZodValue = (value: any) => {
  * @experimental
  */
 export const stringsFromZodAnyType = (x: ZodTypeAny) => {
+  if ((x as any).options) {
+    // x should be a z.ZodUnion of some type
+    const arr: string[] = (x as any).options.map((opt: z.ZodAny) => {
+      return stringsFromZodAnyType(opt)
+    })
+    const strings = arr.flat()
+    strings.sort()
+    return strings
+  }
+
   if (x instanceof z.ZodBigInt) {
     return x.description ? [x.description] : ['A BigInt']
   } else if (x instanceof z.ZodBoolean) {
@@ -65,8 +75,11 @@ export const stringsFromZodAnyType = (x: ZodTypeAny) => {
     strings.sort()
     return strings
   } else {
-    // console.log('=== stringFromZodAnyType x._def ===', x._def)
-    return x.description ? [x.description] : ['TODO']
+    let not_handled = 'unknown'
+    if (x._def && x._def.typeName) {
+      not_handled = x._def.typeName
+    }
+    return x.description ? [`${not_handled} (${x.description})`] : [not_handled]
   }
 }
 
