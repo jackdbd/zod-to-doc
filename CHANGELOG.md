@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.0](https://github.com/jackdbd/zod-to-doc/compare/v1.0.7...v1.1.0) (2024-04-25)
+
+
+### Features
+
+* render any z.union() as strings ([e95b108](https://github.com/jackdbd/zod-to-doc/commit/e95b10849ca2e00807fcb2d1f0b7ac3b99c7d01a))
+
 ## [1.0.7](https://github.com/jackdbd/zod-to-doc/compare/v1.0.6...v1.0.7) (2024-02-06)
 
 
