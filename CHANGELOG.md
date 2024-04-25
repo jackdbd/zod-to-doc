@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.1](https://github.com/jackdbd/zod-to-doc/compare/v1.1.0...v1.1.1) (2024-04-25)
+
+
+### Bug Fixes
+
+* detect a ZodUnion in a different way ([b2d2d75](https://github.com/jackdbd/zod-to-doc/commit/b2d2d7598d129d7d0bb4dbf91057d311c352a69a))
+
 ## [1.1.0](https://github.com/jackdbd/zod-to-doc/compare/v1.0.7...v1.1.0) (2024-04-25)
 
 
