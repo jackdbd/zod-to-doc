@@ -77,7 +77,7 @@
     "readme": "npm run example && tsm readme.ts",
     "release:dry": "semantic-release --debug --dry-run --no-ci",
     "size": "pkg-size ./dist --sort-by=brotli --ignore-files '{*.d.ts,*.map}'",
-    "test": "node --test --experimental-test-coverage",
+    "test": "node --test",
     "test:ci": "node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info",
     "test:watch": "node --test --watch"
   },
