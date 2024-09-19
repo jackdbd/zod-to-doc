@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## [1.1.2](https://github.com/jackdbd/zod-to-doc/compare/v1.1.1...v1.1.2) (2024-09-19)
+
+
+### Bug Fixes
+
+* add overrides to avoid vulnerabilities ([fd376c0](https://github.com/jackdbd/zod-to-doc/commit/fd376c09b90e4bb6c9799da91348519216110254))
+
 ## [1.1.1](https://github.com/jackdbd/zod-to-doc/compare/v1.1.0...v1.1.1) (2024-04-25)
 
 
